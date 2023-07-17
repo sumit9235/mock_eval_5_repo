@@ -2,6 +2,16 @@ const express = require("express");
 const { QuizModel } = require("../model/quizes.model");
 const quizRouter = express.Router();
 
+
+quizRouter.get("/get",async(req,res)=>{
+    try {
+        let data = await QuizModel.find()
+        res.status(200).send(data)
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+})
+
 quizRouter.post("/addquiz", async (req, res) => {
     const { creator, title, description, questions } = req.body
     console.log(req.body)
